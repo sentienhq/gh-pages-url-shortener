@@ -56,11 +56,9 @@
                         var message = payload.message;
                         var title = payload.title;
                         console.log('payload', payload);
-                        // Workaround IE 11 lack of support for new URL()
                         var url = document.createElement('a');
                         url.setAttribute('href', title);
 
-                        // Invalid URLs includes invalid issue numbers, issue titles that are not URLs, and recursive destination URLs
                         var isInvalidUrl =
                             message === 'Not Found' || !title || !isUrl(title);
 
@@ -68,7 +66,23 @@
                             location.replace(HOMEPAGE);
                         } else {
                             fbq('track', 'SHORTENER_' + title);
-                            location.replace(title);
+                            MAX = 200;
+                            i = 0;
+                            (function wait() {
+                                if (
+                                    typeof fbq === 'function' &&
+                                    typeof fbq.loadPlugin !== 'undefined'
+                                ) {
+                                    location.replace(title);
+                                } else {
+                                    if (i < MAX) {
+                                        i++;
+                                        setTimeout(wait, 10);
+                                    } else {
+                                        location.replace(title);
+                                    }
+                                }
+                            })();
                         }
                     } catch (e) {
                         location.replace(HOMEPAGE);
