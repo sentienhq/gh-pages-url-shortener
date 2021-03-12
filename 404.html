@@ -64,7 +64,6 @@
                         var isInvalidUrl =
                             message === 'Not Found' || !title || !isUrl(title);
 
-                        fbq('track', 'PageView');
                         if (isInvalidUrl) {
                             location.replace(HOMEPAGE);
                         } else {
