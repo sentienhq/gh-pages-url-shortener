@@ -9,9 +9,33 @@
              */
             // Format: https://api.github.com/repos/{owner}/{repo}/issues/
             var GITHUB_ISSUES_LINK =
-                'https://api.github.com/repos/sentienhq/Sentien-shortener-db/issues/?page=0&per_page=100';
-            var PATH_SEGMENTS_TO_SKIP = 0;
+                'https://api.github.com/repos/sentienhq/Sentien-shortener-db/issues/';
+            var HOMEPAGE = 'https://sentienhq.com/';
 
+            !(function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                    n.callMethod
+                        ? n.callMethod.apply(n, arguments)
+                        : n.queue.push(arguments);
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s);
+            })(
+                window,
+                document,
+                'script',
+                'https://connect.facebook.net/en_US/fbevents.js',
+            );
+            fbq('init', '275949140366976');
             /**
              * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
              */
@@ -24,19 +48,8 @@
 
             function redirect() {
                 var location = window.location;
-                var issueNumber = location.pathname.split('/')[
-                    PATH_SEGMENTS_TO_SKIP + 1
-                ];
-                var homepage =
-                    location.protocol +
-                    '//' +
-                    location.hostname +
-                    (location.port ? ':' + location.port : '') +
-                    '/' +
-                    location.pathname.split('/')[PATH_SEGMENTS_TO_SKIP];
-
+                var issueNumber = location.pathname.split('/')[1];
                 var xhr = new XMLHttpRequest();
-
                 xhr.onload = function () {
                     try {
                         var payload = JSON.parse(xhr.response);
@@ -49,24 +62,22 @@
 
                         // Invalid URLs includes invalid issue numbers, issue titles that are not URLs, and recursive destination URLs
                         var isInvalidUrl =
-                            message === 'Not Found' ||
-                            !title ||
-                            !isUrl(title) ||
-                            url.hostname === location.hostname;
+                            message === 'Not Found' || !title || !isUrl(title);
 
+                        fbq('track', 'PageView');
                         if (isInvalidUrl) {
-                            // location.replace(homepage);
-                            location.replace('https://sentienhq.com/');
+                            location.replace(HOMEPAGE);
                         } else {
+                            fbq('track', 'SHORTENER_' + title);
                             location.replace(title);
                         }
                     } catch (e) {
-                        location.replace(homepage);
+                        location.replace(HOMEPAGE);
                     }
                 };
 
                 xhr.onerror = function () {
-                    location.replace(homepage);
+                    location.replace(HOMEPAGE);
                 };
                 xhr.open('GET', GITHUB_ISSUES_LINK + issueNumber);
                 xhr.send();
@@ -75,5 +86,7 @@
             redirect();
         </script>
     </head>
-    <body></body>
+    <body>
+        Redirecting ... <span id="path"></span>
+    </body>
 </html>
