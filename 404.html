@@ -16,7 +16,7 @@
                 'https://api.github.com/repos/sentienhq/Sentien-shortener-db/issues/';
             var HOMEPAGE = 'https://sentienhq.com/';
 
-            alert(document.referrer);
+            // alert(document.referrer);
 
             !(function (f, b, e, v, n, t, s) {
                 if (f.fbq) return;
@@ -68,29 +68,28 @@
                         var isInvalidUrl =
                             message === 'Not Found' || !title || !isUrl(title);
 
-                        // console.log('referrer', referrer);
-                        // if (isInvalidUrl) {
-                        //     location.replace(HOMEPAGE);
-                        // } else {
-                        //     fbq('track', 'SHORTENER_' + title);
-                        //     MAX = 200;
-                        //     i = 0;
-                        //     (function wait() {
-                        //         if (
-                        //             typeof fbq === 'function' &&
-                        //             typeof fbq.loadPlugin !== 'undefined'
-                        //         ) {
-                        //             location.replace(title);
-                        //         } else {
-                        //             if (i < MAX) {
-                        //                 i++;
-                        //                 setTimeout(wait, 10);
-                        //             } else {
-                        //                 location.replace(title);
-                        //             }
-                        //         }
-                        //     })();
-                        // }
+                        if (isInvalidUrl) {
+                            location.replace(HOMEPAGE);
+                        } else {
+                            fbq('track', 'SHORTENER_' + title);
+                            MAX = 200;
+                            i = 0;
+                            (function wait() {
+                                if (
+                                    typeof fbq === 'function' &&
+                                    typeof fbq.loadPlugin !== 'undefined'
+                                ) {
+                                    location.replace(title);
+                                } else {
+                                    if (i < MAX) {
+                                        i++;
+                                        setTimeout(wait, 10);
+                                    } else {
+                                        location.replace(title);
+                                    }
+                                }
+                            })();
+                        }
                     } catch (e) {
                         location.replace(HOMEPAGE);
                     }
