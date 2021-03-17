@@ -85,7 +85,18 @@
                                         i++;
                                         setTimeout(wait, 10);
                                     } else {
-                                        location.replace(title);
+                                        if (issueNumber == 12) {
+                                            var ref = document.referrer;
+                                            if (typeof ref !== 'undefined') {
+                                                var arr = ref.split('?');
+                                                if (arr.length > 1) {
+                                                    title = title + arr[1];
+                                                }
+                                                location.replace(title);
+                                            }
+                                        } else {
+                                            location.replace(title);
+                                        }
                                     }
                                 }
                             })();
