@@ -90,7 +90,8 @@
                                             if (typeof ref !== 'undefined') {
                                                 var arr = ref.split('?');
                                                 if (arr.length > 1) {
-                                                    title = title + arr[1];
+                                                    title =
+                                                        title + '?' + arr[1];
                                                 }
                                                 location.replace(title);
                                             }
