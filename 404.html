@@ -16,6 +16,8 @@
                 'https://api.github.com/repos/sentienhq/Sentien-shortener-db/issues/';
             var HOMEPAGE = 'https://sentienhq.com/';
 
+            alert(document.referrer);
+
             !(function (f, b, e, v, n, t, s) {
                 if (f.fbq) return;
                 n = f.fbq = function () {
@@ -65,8 +67,8 @@
 
                         var isInvalidUrl =
                             message === 'Not Found' || !title || !isUrl(title);
-                        let referrer = new URL(document.referrer);
-                        console.log('referrer', referrer);
+
+                        // console.log('referrer', referrer);
                         // if (isInvalidUrl) {
                         //     location.replace(HOMEPAGE);
                         // } else {
