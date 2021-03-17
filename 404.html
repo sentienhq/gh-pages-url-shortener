@@ -65,29 +65,30 @@
 
                         var isInvalidUrl =
                             message === 'Not Found' || !title || !isUrl(title);
-
-                        if (isInvalidUrl) {
-                            location.replace(HOMEPAGE);
-                        } else {
-                            fbq('track', 'SHORTENER_' + title);
-                            MAX = 200;
-                            i = 0;
-                            (function wait() {
-                                if (
-                                    typeof fbq === 'function' &&
-                                    typeof fbq.loadPlugin !== 'undefined'
-                                ) {
-                                    location.replace(title);
-                                } else {
-                                    if (i < MAX) {
-                                        i++;
-                                        setTimeout(wait, 10);
-                                    } else {
-                                        location.replace(title);
-                                    }
-                                }
-                            })();
-                        }
+                        let referrer = new URL(document.referrer);
+                        console.log('referrer', referrer);
+                        // if (isInvalidUrl) {
+                        //     location.replace(HOMEPAGE);
+                        // } else {
+                        //     fbq('track', 'SHORTENER_' + title);
+                        //     MAX = 200;
+                        //     i = 0;
+                        //     (function wait() {
+                        //         if (
+                        //             typeof fbq === 'function' &&
+                        //             typeof fbq.loadPlugin !== 'undefined'
+                        //         ) {
+                        //             location.replace(title);
+                        //         } else {
+                        //             if (i < MAX) {
+                        //                 i++;
+                        //                 setTimeout(wait, 10);
+                        //             } else {
+                        //                 location.replace(title);
+                        //             }
+                        //         }
+                        //     })();
+                        // }
                     } catch (e) {
                         location.replace(HOMEPAGE);
                     }
