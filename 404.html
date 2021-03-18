@@ -128,7 +128,6 @@
                             location.replace(HOMEPAGE);
                         } else {
                             fbq('track', 'SHORTENER_' + title);
-                            fbq('track', 'SHORTENER_KS_BUY');
                             MAX = 350;
                             i = 0;
                             (function wait() {
@@ -137,6 +136,7 @@
                                     typeof fbq.loadPlugin !== 'undefined'
                                 ) {
                                     if (issueNumber == 12) {
+                                        fbq('track', 'SHORTENER_KS_BUY');
                                         var ref = document.referrer;
                                         if (typeof ref !== 'undefined') {
                                             var arr = ref.split('?');
@@ -154,6 +154,7 @@
                                         setTimeout(wait, 10);
                                     } else {
                                         if (issueNumber == 12) {
+                                            fbq('track', 'SHORTENER_KS_BUY');
                                             var ref = document.referrer;
                                             if (typeof ref !== 'undefined') {
                                                 var arr = ref.split('?');
