@@ -117,7 +117,6 @@
                         var payload = JSON.parse(xhr.response);
                         var message = payload.message;
                         var title = payload.title;
-                        console.log('payload', payload);
                         var url = document.createElement('a');
                         url.setAttribute('href', title);
 
@@ -128,6 +127,9 @@
                             location.replace(HOMEPAGE);
                         } else {
                             fbq('track', 'SHORTENER_' + title);
+                            if (issueNumber == 12) {
+                                fbq('track', 'SHORTENER_KS_BUY');
+                            }
                             MAX = 350;
                             i = 0;
                             (function wait() {
@@ -136,7 +138,6 @@
                                     typeof fbq.loadPlugin !== 'undefined'
                                 ) {
                                     if (issueNumber == 12) {
-                                        fbq('track', 'SHORTENER_KS_BUY');
                                         var ref = document.referrer;
                                         if (typeof ref !== 'undefined') {
                                             var arr = ref.split('?');
@@ -154,7 +155,6 @@
                                         setTimeout(wait, 10);
                                     } else {
                                         if (issueNumber == 12) {
-                                            fbq('track', 'SHORTENER_KS_BUY');
                                             var ref = document.referrer;
                                             if (typeof ref !== 'undefined') {
                                                 var arr = ref.split('?');
