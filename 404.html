@@ -137,7 +137,10 @@
                                     typeof fbq === 'function' &&
                                     typeof fbq.loadPlugin !== 'undefined'
                                 ) {
-                                    if (issueNumber == 12) {
+                                    if (
+                                        issueNumber == 12 ||
+                                        issueNumber == 15
+                                    ) {
                                         var ref = document.referrer;
                                         if (typeof ref !== 'undefined') {
                                             var arr = ref.split('?');
@@ -154,7 +157,10 @@
                                         i++;
                                         setTimeout(wait, 10);
                                     } else {
-                                        if (issueNumber == 12) {
+                                        if (
+                                            issueNumber == 12 ||
+                                            issueNumber == 15
+                                        ) {
                                             var ref = document.referrer;
                                             if (typeof ref !== 'undefined') {
                                                 var arr = ref.split('?');
