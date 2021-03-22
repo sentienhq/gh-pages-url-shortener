@@ -98,6 +98,7 @@
                 'https://connect.facebook.net/en_US/fbevents.js',
             );
             fbq('init', '275949140366976');
+            fbq('init', '193338219222528');
             /**
              * DO NOT TOUCH ANYTHING BELOW THIS COMMENT UNLESS YOU KNOW WHAT YOU ARE DOING
              */
@@ -127,8 +128,11 @@
                             location.replace(HOMEPAGE);
                         } else {
                             fbq('track', 'SHORTENER_' + title);
-                            if (issueNumber == 12) {
+                            if (issueNumber == 12 || issueNumber == 15) {
                                 fbq('track', 'SHORTENER_KS_BUY');
+                            }
+                            if (issueNumber == 16) {
+                                fbq('track', 'SHORTENER_DAREK_ADS');
                             }
                             MAX = 350;
                             i = 0;
