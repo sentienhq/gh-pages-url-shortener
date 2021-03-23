@@ -127,9 +127,14 @@
                         if (isInvalidUrl) {
                             location.replace(HOMEPAGE);
                         } else {
-                            fbq('track', 'SHORTENER_' + title);
                             if (issueNumber == 12 || issueNumber == 15) {
                                 fbq('track', 'SHORTENER_KS_BUY');
+                                fbq(
+                                    'track',
+                                    'SHORTENER_https://www.kickstarter.com/projects/sentien/sentien-audio/pledge/new',
+                                );
+                            } else {
+                                fbq('track', 'SHORTENER_' + title);
                             }
                             if (issueNumber == 16) {
                                 fbq('track', 'SHORTENER_DAREK_ADS');
